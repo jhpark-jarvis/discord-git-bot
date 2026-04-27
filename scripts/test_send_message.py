@@ -26,8 +26,10 @@ from dotenv import load_dotenv
 load_dotenv(project_root / "config" / ".env")
 
 # 기본 설정
+# 주의: message_content Intent를 사용하려면 Discord 개발자 포털에서 활성화해야 합니다
+# 테스트 메시지 전송만 할 경우 아래 주석 처리 가능
 intents = discord.Intents.default()
-intents.message_content = True
+intents.message_content = True  # 필요시 주석 해제하고 개발자 포털에서 활성화
 
 client = discord.Client(intents=intents)
 
@@ -108,6 +110,15 @@ async def main():
     except discord.LoginFailure:
         print("❌ 오류: 잘못된 Discord 토큰입니다.")
         print("   DISCORD_TOKEN을 확인하세요.")
+        sys.exit(1)
+    except discord.PrivilegedIntentsRequired:
+        print("❌ 오류: Privileged Intents가 활성화되지 않았습니다.")
+        print()
+        print("해결 방법:")
+        print("1. https://discord.com/developers/applications/ 방문")
+        print("2. 봇 애플리케이션 선택")
+        print("3. 'Bot' 메뉴 → 'Privileged Gateway Intents' 섹션")
+        print("4. 'Message Content Intent' 활성화 후 저장")
         sys.exit(1)
     except Exception as e:
         print(f"❌ 오류: {type(e).__name__} - {e}")
