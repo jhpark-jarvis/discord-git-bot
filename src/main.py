@@ -31,13 +31,19 @@ async def hello(ctx):
 if __name__ == "__main__":
     # .env 파일에서 DISCORD_TOKEN을 읽어 봇을 실행
     from dotenv import load_dotenv
+    from pathlib import Path
     import os
     
-    load_dotenv()
+    # 프로젝트 루트의 config/.env 파일 로드
+    project_root = Path(__file__).parent.parent
+    env_path = project_root / "config" / ".env"
+    load_dotenv(env_path)
+    
     token = os.getenv("DISCORD_TOKEN")
     
     if not token:
         print("오류: .env 파일에 DISCORD_TOKEN이 설정되어 있지 않습니다.")
+        print(f"찾는 경로: {env_path}")
         exit(1)
     
     bot.run(token)
