@@ -175,17 +175,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 - **PowerShell 권장** (색상, 한글 완벽 지원)
 - cmd도 완벽하게 작동함
 
-## 다음 단계
+## Plan
 
 - Git 연동 기능 구현
 - Discord 이벤트 핸들러 추가
 - 커스텀 명령어 개발
 - 데이터베이스 통합 (필요 시)
-
-## 라이선스
-
-MIT License
-
-## 기여
-
-프로젝트에 기여하고 싶으신 경우 Pull Request를 보내주세요.
