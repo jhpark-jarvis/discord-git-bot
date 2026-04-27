@@ -1,5 +1,6 @@
 @echo off
-REM Discord-Git Bot 가상환경 설정 스크립트
+chcp 65001 >nul
+REM Discord-Git Bot 가상환경 설정 스크립트 (cmd용)
 REM 이 스크립트는 Python 가상환경을 생성하고 필요한 패키지를 설치합니다.
 
 echo.
@@ -63,12 +64,18 @@ if exist "%REQUIREMENTS_FILE%" (
     echo [진행] requirements.txt에서 패키지를 설치 중입니다...
     echo 경로: %REQUIREMENTS_FILE%
     echo.
-    pip install --upgrade pip
+    
+    REM pip 업그레이드 (선택사항 - 오류 무시)
+    echo [정보] pip을 업그레이드 중입니다...
+    python -m pip install --upgrade pip --quiet 2>nul
+    
+    REM 패키지 설치
     pip install -r "%REQUIREMENTS_FILE%"
     
     if %ERRORLEVEL% neq 0 (
         echo.
         echo [경고] 패키지 설치 중 일부 오류가 발생했습니다.
+        echo 다시 실행하거나 수동으로 설치해주세요.
     ) else (
         echo [완료] 모든 패키지가 설치되었습니다.
     )

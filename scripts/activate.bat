@@ -1,5 +1,6 @@
 @echo off
-REM Discord-Git Bot 가상환경 활성화 스크립트
+chcp 65001 >nul
+REM Discord-Git Bot 가상환경 활성화 스크립트 (cmd용)
 
 set VENV_DIR=%~dp0..\venv
 
