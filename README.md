@@ -1,53 +1,253 @@
-# Discord-Git Bot
+# 🤖 Discord-Git Bot
 
-Discord 서버와 Git 저장소를 연동하는 Discord 봇 프로젝트입니다.
+Discord 서버에서 Git/GitHub 저장소를 관리하는 통합 봇입니다.
 
-## 프로젝트 구조
+## ✨ 주요 기능
+
+- 📝 **Git 커맨드**: Discord에서 Git 작업 수행
+  - 저장소 상태, 커밋 로그, 브랜치 관리
+  
+- 📦 **GitHub 정보**: 저장소 정보 조회
+  - 저장소 상세 정보, 오픈 이슈, PR 목록
+  
+- 🔗 **GitHub 웹훅**: 저장소 이벤트 자동 알림
+  - Push, PR, Issues, Releases 알림
+  
+- ⚙️ **관리자 기능**: 봇 설정 및 관리
+  - 설정 확인, 핑 테스트
+
+## 🚀 빠른 시작
+
+### 사전 요구사항
+
+- Python 3.10 이상
+- Discord 서버 (관리자 권한)
+- GitHub 계정
+
+### 1단계: 설정
+
+```bash
+# .env 파일 생성
+cp config\.env.example config\.env
+
+# 편집: DISCORD_TOKEN과 GITHUB_TOKEN 입력
+```
+
+자세한 설정 방법: [SETUP.md](docs/SETUP.md)
+
+### 2단계: 설치
+
+```bash
+# 의존성 설치
+pip install -r requirements.txt
+```
+
+### 3단계: 실행
+
+```bash
+python -m src.main
+```
+
+## 📋 커맨드
+
+### Git 커맨드 (`!git`)
+
+```
+!git status          # 저장소 상태
+!git log [n]         # 최근 n개 커밋 (기본: 5)
+!git branch          # 브랜치 목록
+!git pull            # 저장소 동기화
+```
+
+### 저장소 커맨드 (`!repo`)
+
+```
+!repo info           # 저장소 정보
+!repo issues         # 오픈 이슈 목록
+!repo prs            # 오픈 PR 목록
+```
+
+### 관리자 커맨드 (`!admin`)
+
+```
+!admin config        # 설정 확인 (관리자만)
+!admin ping          # 핑 테스트 (관리자만)
+```
+
+더 많은 커맨드: [COMMANDS.md](docs/COMMANDS.md)
+
+## 📁 프로젝트 구조
 
 ```
 discord-git-bot/
-├── scripts/
-│   ├── setup_venv.bat          # 가상환경 생성 (cmd용)
-│   ├── setup_venv.ps1          # 가상환경 생성 (PowerShell용)
-│   ├── activate.bat            # 가상환경 활성화 (cmd용)
-│   └── activate.ps1            # 가상환경 활성화 (PowerShell용)
-├── src/
-│   └── main.py                 # 봇 메인 코드
-├── config/
-│   └── .env.example            # 환경설정 예제
-├── requirements.txt            # Python 의존성
-├── .gitignore                  # Git 무시 파일
-└── README.md                   # 프로젝트 설명
+├── src/                        # 메인 소스코드
+│   ├── main.py                # 봇 진입점
+│   ├── config.py              # 설정 관리
+│   ├── cogs/                  # 기능 모듈 (커맨드)
+│   ├── handlers/              # 이벤트 핸들러
+│   ├── utils/                 # 유틸리티
+│   └── services/              # 비즈니스 로직
+├── config/                    # 설정 파일
+│   └── .env.example          # 환경변수 예제
+├── scripts/                   # 유틸리티 스크립트
+├── docs/                      # 문서
+│   ├── SETUP.md              # 설치 가이드
+│   ├── COMMANDS.md           # 커맨드 문서
+│   └── WEBHOOK_SETUP.md      # 웹훅 설정
+├── tests/                     # 테스트 코드
+└── PLAN.md                    # 프로젝트 계획
 ```
 
-## 빠른 시작
+## 🔧 설치 가이드
 
-### 방법 1: Command Prompt (cmd) 사용
+### Windows (PowerShell)
 
-#### 1단계: 가상환경 설정 (첫 실행)
-```cmd
-scripts\setup_venv.bat
-```
-
-#### 2단계: 가상환경 활성화 (이후 실행)
-```cmd
-scripts\activate.bat
-```
-
-### 방법 2: PowerShell 사용
-
-#### 1단계: 가상환경 설정 (첫 실행)
 ```powershell
+# 1. 가상환경 생성
 .\scripts\setup_venv.ps1
+
+# 2. 가상환경 활성화
+.\scripts\activate.ps1
+
+# 3. 의존성 설치
+pip install -r requirements.txt
+
+# 4. 설정
+cp config\.env.example config\.env
+# config/.env 파일 편집
+
+# 5. 실행
+python -m src.main
 ```
 
-**주의**: PowerShell에서 실행 정책 오류 발생 시:
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-그 후 다시 실행하세요.
+### Windows (Command Prompt)
 
-#### 2단계: 가상환경 활성화 (이후 실행)
+```cmd
+# 1. 가상환경 생성
+scripts\setup_venv.bat
+
+# 2. 가상환경 활성화
+scripts\activate.bat
+
+# 3. 이후는 위와 동일
+```
+
+### 상세 설정 가이드
+
+더 자세한 설정 방법은 [docs/SETUP.md](docs/SETUP.md) 참고
+
+## 🔐 환경변수 설정
+
+**config/.env** (필수):
+
+```env
+# Discord 토큰 (필수)
+DISCORD_TOKEN=your_token_here
+
+# GitHub 토큰 (필수)
+GITHUB_TOKEN=your_token_here
+
+# GitHub 저장소 (필수, owner/repo 형식)
+GITHUB_REPO=username/repository
+
+# 커맨드 프리픽스 (선택, 기본값: !)
+COMMAND_PREFIX=!
+
+# 로그 레벨 (선택, 기본값: INFO)
+LOG_LEVEL=INFO
+```
+
+토큰 발급 방법:
+- **Discord 토큰**: [Discord Developer Portal](https://discord.com/developers/applications/)
+- **GitHub 토큰**: [GitHub Settings - Tokens](https://github.com/settings/tokens)
+
+## 📚 문서
+
+| 문서 | 설명 |
+|------|------|
+| [SETUP.md](docs/SETUP.md) | Discord/GitHub 설정 및 설치 가이드 |
+| [COMMANDS.md](docs/COMMANDS.md) | 모든 커맨드 상세 설명 |
+| [WEBHOOK_SETUP.md](docs/WEBHOOK_SETUP.md) | GitHub 웹훅 설정 (개발 중) |
+| [PLAN.md](PLAN.md) | 프로젝트 비전 및 로드맵 |
+| [CHANGELOG.md](CHANGELOG.md) | 버전별 변경 사항 |
+
+## 🔄 개발 로드맵
+
+### Phase 1: 기초 인프라 ✅
+- [x] 프로젝트 구조 설계
+- [x] Cogs 시스템 구현
+- [x] Git 커맨드 구현
+- [x] 저장소 커맨드 구현
+
+### Phase 2: 웹훅 연동 (진행 중)
+- [ ] 웹훅 수신 서버
+- [ ] GitHub 이벤트 알림
+- [ ] 웹훅 자동 설정
+
+### Phase 3: 고급 기능
+- [ ] 통계 및 리포팅
+- [ ] 데이터베이스 통합
+- [ ] Docker 지원
+
+## 🛠️ 기술 스택
+
+- **Python 3.10+**
+- **discord.py**: Discord 봇 API
+- **GitPython**: Git 명령 실행
+- **aiohttp**: 비동기 HTTP 클라이언트
+- **PyGithub**: GitHub API
+- **python-dotenv**: 환경변수 관리
+
+## 🆘 문제 해결
+
+### 토큰 오류
+```
+❌ 오류: 잘못된 Discord 토큰입니다.
+```
+→ Discord Developer Portal에서 토큰 재확인
+
+### Privileged Intents 오류
+```
+❌ PrivilegedIntentsRequired
+```
+→ Discord Developer Portal → Bot → Privileged Gateway Intents 활성화
+
+### 저장소를 찾을 수 없음
+```
+❌ 저장소를 사용할 수 없습니다
+```
+→ GIT_REPO_PATH가 올바른지, 유효한 Git 저장소인지 확인
+
+더 많은 도움: [docs/SETUP.md - 문제 해결](docs/SETUP.md#-문제-해결)
+
+## 📝 테스트
+
+```bash
+# 메시지 테스트 스크립트
+python scripts/test_send_message.py <channel_id> "테스트 메시지"
+```
+
+## 📞 지원
+
+문제가 발생하면:
+
+1. [문제 해결 가이드](docs/SETUP.md#-문제-해결) 확인
+2. 로그 파일 확인: `logs/bot.log`
+3. GitHub Issues 등록
+
+## 📄 라이선스
+
+이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
+
+## 👨‍💻 기여
+
+버그 리포트, 기능 제안, Pull Request를 환영합니다!
+
+---
+
+**현재 상태**: 개발 중 (v1.0.0)
+
+최종 업데이트: 2026-04-27
 ```powershell
 .\scripts\activate.ps1
 ```
