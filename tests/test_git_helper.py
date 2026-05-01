@@ -105,7 +105,7 @@ class TestGitHelper:
         assert commits[0]['hash'] == 'abc1234'
         assert commits[0]['author'] == 'John Doe'
         assert commits[0]['message'] == 'Fix: bug in git helper'
-        assert commits[1]['hash'] == 'def98765'
+        assert commits[1]['hash'] == 'def9876'
         assert commits[1]['author'] == 'Jane Smith'
         assert commits[1]['message'] == 'Feat: add new feature'
     
@@ -195,8 +195,9 @@ class TestGitHelper:
         mock_repo_instance = MagicMock()
         mock_repo.return_value = mock_repo_instance
         
-        # active_branch 속성이 exception을 발생시키도록 설정
-        mock_repo_instance.active_branch = MagicMock(side_effect=Exception("Detached HEAD"))
+        # PropertyMock으로 active_branch 속성이 exception을 발생시키도록 설정
+        from unittest.mock import PropertyMock
+        type(mock_repo_instance).active_branch = PropertyMock(side_effect=Exception("Detached HEAD"))
         
         git_helper = GitHelper('.')
         branch = git_helper.get_current_branch()
