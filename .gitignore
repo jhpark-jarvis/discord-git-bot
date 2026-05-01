@@ -219,3 +219,7 @@ __marimo__/
 
 # Private data files
 DISCORD_INFO
+
+# Test log files
+final_test.txt
+test_result.txt
