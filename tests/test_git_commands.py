@@ -58,7 +58,7 @@ class TestGitCommands:
             'status': 'On branch main\nnothing to commit'
         }
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -79,7 +79,7 @@ class TestGitCommands:
         mock_bot = MagicMock(spec=commands.Bot)
         mock_git_service_class.side_effect = Exception("Error")
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '/invalid'
             cog = GitCommands(mock_bot)
         
@@ -140,7 +140,7 @@ class TestGitCommands:
             'commits': mock_commits
         }
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -162,7 +162,7 @@ class TestGitCommands:
         
         mock_git_service.get_recent_commits.return_value = {'commits': []}
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -209,7 +209,7 @@ class TestGitCommands:
             'current_branch': 'main'
         }
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -229,7 +229,7 @@ class TestGitCommands:
         mock_bot = MagicMock(spec=commands.Bot)
         mock_git_service_class.side_effect = Exception("Error")
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '/invalid'
             cog = GitCommands(mock_bot)
         
@@ -253,7 +253,7 @@ class TestGitCommands:
             'result': '✅ Pull 완료'
         }
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -281,7 +281,7 @@ class TestGitCommands:
             'error': 'Network error'
         }
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
