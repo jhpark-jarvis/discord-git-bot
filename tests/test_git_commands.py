@@ -24,7 +24,7 @@ class TestGitCommands:
         mock_git_service = MagicMock()
         mock_git_service_class.return_value = mock_git_service
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '.'
             cog = GitCommands(mock_bot)
         
@@ -38,7 +38,7 @@ class TestGitCommands:
         mock_bot = MagicMock(spec=commands.Bot)
         mock_git_service_class.side_effect = Exception("Error")
         
-        with patch('src.cogs.git_commands.config') as mock_config:
+        with patch('src.config') as mock_config:
             mock_config.GITHUB_REPO_PATH = '/invalid'
             cog = GitCommands(mock_bot)
         
