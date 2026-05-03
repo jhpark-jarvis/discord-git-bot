@@ -19,7 +19,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # 설정 및 로거 초기화
-from .config import validate_config, COMMAND_PREFIX, DISCORD_TOKEN, LOG_LEVEL
+from .config import validate_config, COMMAND_PREFIX, DISCORD_TOKEN, LOG_LEVEL, GITHUB_REPO, GITHUB_REPO_PATH
 from .utils.logger import setup_logger
 
 logger = setup_logger(__name__, LOG_LEVEL)
@@ -43,7 +43,37 @@ async def on_ready():
     print(f"Bot Name: {bot.user}")
     print(f"Bot ID: {bot.user.id}")
     print(f"Command Prefix: {COMMAND_PREFIX}")
+    print(f"GitHub Repository: {GITHUB_REPO}")
+    print(f"Local Path: {GITHUB_REPO_PATH}")
     print(f"{'=' * 50}\n")
+    
+    # 봇 활성화 메시지를 Discord 채널에 전송 (선택사항)
+    try:
+        from .config import DISCORD_CHANNEL_ID
+        if DISCORD_CHANNEL_ID:
+            channel = bot.get_channel(int(DISCORD_CHANNEL_ID))
+            if channel:
+                embed = discord.Embed(
+                    title="✅ 봇이 활성화되었습니다",
+                    description=f"**{bot.user}** 가 준비되었습니다!",
+                    color=discord.Color.green()
+                )
+                embed.add_field(name="📦 GitHub Repository", value=f"`{GITHUB_REPO}`", inline=False)
+                embed.add_field(name="📁 Local Path", value=f"`{GITHUB_REPO_PATH}`", inline=False)
+                embed.add_field(
+                    name="🔧 사용 가능한 명령어",
+                    value=f"""```
+{COMMAND_PREFIX}git status   - 저장소 상태 확인
+{COMMAND_PREFIX}git log [n]  - 최근 n개 커밋 보기 (기본: 5)
+{COMMAND_PREFIX}git branch   - 브랜치 목록 확인
+{COMMAND_PREFIX}git pull     - 저장소 동기화
+```""",
+                    inline=False
+                )
+                await channel.send(embed=embed)
+                logger.info(f"✅ 봇 활성화 메시지가 #{channel.name}에 전송되었습니다.")
+    except Exception as e:
+        logger.error(f"⚠️  봇 활성화 메시지 전송 실패: {e}")
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error: commands.CommandError):
