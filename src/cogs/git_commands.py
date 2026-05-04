@@ -28,7 +28,10 @@ class GitCommands(commands.Cog):
         self.bot = bot
         from .. import config
         try:
-            self.git_service = GitService(config.GITHUB_REPO_PATH)
+            self.git_service = GitService(
+                repo_path=config.GITHUB_REPO_PATH,
+                github_repo=config.GITHUB_REPO
+            )
         except Exception as e:
             logger.error(f"Git 서비스 초기화 실패: {e}")
             self.git_service = None
