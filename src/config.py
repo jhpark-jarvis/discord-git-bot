@@ -23,7 +23,13 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
 # GitHub 설정
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPO")
-GITHUB_REPO_PATH = os.getenv("GITHUB_REPO_PATH", "./repositories/")
+
+# GitHub 저장소 기반으로 로컬 경로 자동 생성
+if GITHUB_REPO:
+    owner, repo = GITHUB_REPO.split("/")
+    GITHUB_REPO_PATH = str(PROJECT_ROOT / "repositories" / owner / repo)
+else:
+    GITHUB_REPO_PATH = str(PROJECT_ROOT / "repositories")
 
 # 웹훅 설정 (선택)
 WEBHOOK_PORT = int(os.getenv("WEBHOOK_PORT", "8080"))
