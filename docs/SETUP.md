@@ -7,7 +7,7 @@ Discord-Git Bot을 설정하고 실행하는 방법입니다.
 - Python 3.10 이상
 - Git
 - Discord 서버 (관리자 권한)
-- GitHub 계정
+- GitHub 계정 (토큰 필요)
 
 ---
 
@@ -31,20 +31,20 @@ Discord-Git Bot을 설정하고 실행하는 방법입니다.
 ### 5. Privileged Gateway Intents 활성화
 - "Privileged Gateway Intents" 섹션으로 스크롤
 - 다음 항목 활성화:
-  - ✅ **Message Content Intent**
-  - (선택) ✅ **Server Members Intent**
-  - (선택) ✅ **Presence Intent**
+  - Message Content Intent (필수)
+  - Server Members Intent (선택)
+  - Presence Intent (선택)
 - "Save Changes" 클릭
 
 ### 6. OAuth2 권한 설정
 - 왼쪽 메뉴에서 "OAuth2" → "URL Generator" 클릭
-- **Scopes 선택:**
-  - ✅ bot
-- **Permissions 선택:**
-  - ✅ Send Messages
-  - ✅ Embed Links
-  - ✅ Read Messages/View Channels
-  - ✅ Read Message History
+- Scopes 선택:
+  - bot
+- Permissions 선택:
+  - Send Messages
+  - Embed Links
+  - Read Messages/View Channels
+  - Read Message History
 - 생성된 URL 복사 후 브라우저에서 열어 봇을 서버에 초대
 
 ---
@@ -55,9 +55,9 @@ Discord-Git Bot을 설정하고 실행하는 방법입니다.
 - GitHub 우측 상단 프로필 → "Settings"
 - 왼쪽 메뉴 → "Developer settings" → "Personal access tokens"
 - "Generate new token (classic)" 클릭
-- **Scopes 선택:**
-  - ✅ repo (모든 레포지토리 접근)
-  - ✅ read:user (사용자 정보)
+- Scopes 선택:
+  - repo (모든 레포지토리 접근)
+  - read:user (사용자 정보)
 - 토큰 복사 (절대 공유 금지!)
 
 ---
