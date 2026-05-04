@@ -223,3 +223,6 @@ DISCORD_INFO
 # Test log files
 final_test.txt
 test_results.txt
+
+# git repositories
+repositories/
