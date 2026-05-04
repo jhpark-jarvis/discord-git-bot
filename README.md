@@ -1,26 +1,31 @@
-# 🤖 Discord-Git Bot
+# Discord-Git Bot
 
 Discord 서버에서 Git/GitHub 저장소를 관리하는 통합 봇입니다.
 
-## ✨ 주요 기능
+## 주요 기능
 
-- 📝 **Git 커맨드**: Discord에서 Git 작업 수행
-  - 저장소 상태, 커밋 로그, 브랜치 관리
+- **Git 커맨드**: Discord에서 Git 작업 수행
+  - 저장소 상태, 커밋 로그, 브랜치 관리, 저장소 동기화
   
-- 📦 **GitHub 정보**: 저장소 정보 조회
+- **GitHub 저장소 자동 관리**: GITHUB_REPO 기반 자동 clone
+  - GitHub 저장소에서 자동으로 clone하여 관리
+  - 로컬 저장소 자동 생성 및 유지
+  
+- **GitHub 정보 조회**: 저장소 정보 및 이슈 확인
   - 저장소 상세 정보, 오픈 이슈, PR 목록
   
-- 🔗 **GitHub 웹훅**: 저장소 이벤트 자동 알림
+- **웹훅 알림**: 저장소 이벤트 자동 알림 (준비 중)
   - Push, PR, Issues, Releases 알림
   
-- ⚙️ **관리자 기능**: 봇 설정 및 관리
+- **관리자 기능**: 봇 설정 및 관리
   - 설정 확인, 핑 테스트
 
-## 🚀 빠른 시작
+## 빠른 시작
 
 ### 사전 요구사항
 
 - Python 3.10 이상
+- Git
 - Discord 서버 (관리자 권한)
 - GitHub 계정
 
@@ -48,54 +53,78 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
-## 📋 커맨드
+## 커맨드
 
 ### Git 커맨드 (`!git`)
 
 ```
-!git status          # 저장소 상태
-!git log [n]         # 최근 n개 커밋 (기본: 5)
-!git branch          # 브랜치 목록
-!git pull            # 저장소 동기화
+!git status          저장소 상태 확인
+!git log [n]         최근 n개 커밋 조회 (기본: 5)
+!git branch          브랜치 목록 표시
+!git pull            저장소 동기화
 ```
 
 ### 저장소 커맨드 (`!repo`)
 
 ```
-!repo info           # 저장소 정보
-!repo issues         # 오픈 이슈 목록
-!repo prs            # 오픈 PR 목록
+!repo info           저장소 정보 조회
+!repo issues         오픈 이슈 목록
+!repo prs            오픈 PR 목록
 ```
 
-### 관리자 커맨드 (`!admin`)
+### 기본 커맨드
 
 ```
-!admin config        # 설정 확인 (관리자만)
-!admin ping          # 핑 테스트 (관리자만)
+!ping                봇 응답 확인
 ```
 
 더 많은 커맨드: [COMMANDS.md](docs/COMMANDS.md)
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 discord-git-bot/
-├── src/                        # 메인 소스코드
-│   ├── main.py                # 봇 진입점
-│   ├── config.py              # 설정 관리
-│   ├── cogs/                  # 기능 모듈 (커맨드)
-│   ├── handlers/              # 이벤트 핸들러
-│   ├── utils/                 # 유틸리티
-│   └── services/              # 비즈니스 로직
-├── config/                    # 설정 파일
-│   └── .env.example          # 환경변수 예제
-├── scripts/                   # 유틸리티 스크립트
-├── docs/                      # 문서
-│   ├── SETUP.md              # 설치 가이드
-│   ├── COMMANDS.md           # 커맨드 문서
-│   └── WEBHOOK_SETUP.md      # 웹훅 설정
-├── tests/                     # 테스트 코드
-└── PLAN.md                    # 프로젝트 계획
+├── src/
+│   ├── main.py               봇 진입점
+│   ├── config.py             설정 관리
+│   ├── cogs/
+│   │   ├── git_commands.py   Git 관련 커맨드
+│   │   ├── repo_commands.py  저장소 관련 커맨드
+│   │   └── admin_commands.py 관리자 커맨드
+│   ├── handlers/             이벤트 핸들러
+│   ├── utils/                유틸리티
+│   │   ├── git_helper.py     Git 래퍼
+│   │   ├── github_api.py     GitHub API 클라이언트
+│   │   ├── logger.py         로깅
+│   │   ├── validators.py     검증
+│   │   └── embedders.py      Embed 생성
+│   └── services/             비즈니스 로직
+│       ├── git_service.py    Git 서비스
+│       └── github_service.py GitHub 서비스
+├── config/
+│   ├── .env                  환경변수
+│   └── .env.example          환경변수 예제
+├── repositories/             자동 clone된 저장소 (GITHUB_REPO 기반)
+├── scripts/
+│   ├── send_test_results.py  테스트 결과 전송
+│   ├── test_send_message.py  메시지 테스트
+│   └── activate.*            가상환경 활성화
+├── tests/                    테스트 코드
+│   ├── test_git_commands.py
+│   ├── test_git_helper.py
+│   ├── test_git_service.py
+│   ├── test_integration_git.py
+│   ├── conftest.py
+│   └── fixtures/
+├── docs/
+│   ├── SETUP.md              설치 가이드
+│   ├── COMMANDS.md           커맨드 문서
+│   └── WEBHOOK_SETUP.md      웹훅 설정
+├── requirements.txt
+├── README.md
+├── CHANGELOG.md
+├── PLAN.md
+└── STATUS.md
 ```
 
 ## 🔧 설치 가이드

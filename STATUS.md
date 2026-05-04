@@ -1,102 +1,48 @@
-## 프로젝트 구조 개선 완료 ✅
+## 프로젝트 상태
 
-### 📊 변경 요약
+### 변경 요약
 
-| 항목 | 설명 |
-|------|------|
-| **새 디렉토리** | 8개 추가 |
-| **새 파일** | 20+ 개 생성 |
-| **업데이트된 파일** | 4개 수정 |
-| **문서** | 4개 추가 |
-
----
-
-## 📁 프로젝트 구조
-
-```
-discord-git-bot/
-├── src/
-│   ├── main.py                 ✅ 개선됨 (Cogs 시스템)
-│   ├── config.py               ✨ 새로 생성
-│   ├── cogs/
-│   │   ├── __init__.py
-│   │   ├── git_commands.py     ✨ Git 커맨드
-│   │   ├── repo_commands.py    ✨ 저장소 커맨드
-│   │   └── admin_commands.py   ✨ 관리자 커맨드
-│   ├── handlers/
-│   │   ├── __init__.py
-│   │   ├── github_webhook.py   ✨ 웹훅 핸들러
-│   │   └── github_events.py    ✨ 이벤트 파서
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── logger.py           ✨ 로깅
-│   │   ├── git_helper.py       ✨ Git 래퍼
-│   │   ├── github_api.py       ✨ GitHub API
-│   │   ├── validators.py       ✨ 검증 도구
-│   │   └── embedders.py        ✨ Embed 생성
-│   └── services/
-│       ├── __init__.py
-│       ├── git_service.py      ✨ Git 비즈니스 로직
-│       └── github_service.py   ✨ GitHub 비즈니스 로직
-├── config/
-│   ├── .env.example            ✅ 개선됨
-│   └── webhooks/
-├── scripts/
-│   ├── test_send_message.py    ✅ 개선됨
-│   ├── activate.bat
-│   └── ...
-├── tests/                      ✨ 새로 생성
-│   └── fixtures/
-├── docs/
-│   ├── SETUP.md                ✨ 설치 가이드
-│   ├── COMMANDS.md             ✨ 커맨드 문서
-│   └── WEBHOOK_SETUP.md        ✨ 웹훅 설정
-├── PLAN.md                     ✨ 프로젝트 계획
-├── CHANGELOG.md                ✨ 변경 사항
-├── requirements.txt            ✅ 개선됨
-└── README.md                   (기존)
-```
+| 항목 | 상태 | 설명 |
+|------|------|------|
+| **기본 구조** | 완료 | Cogs 기반 모듈화 |
+| **Git 커맨드** | 완료 | status, log, branch, pull |
+| **저장소 관리** | 완료 | GITHUB_REPO 기반 자동 clone |
+| **테스트** | 완료 | 41개 테스트 모두 통과 |
+| **로깅** | 완료 | 명령어 실행 로그 |
+| **봇 알림** | 완료 | 활성화 메시지 + 테스트 결과 전송 |
+| **웹훅** | 준비중 | GitHub 이벤트 알림 |
 
 ---
 
-## 🎯 주요 개선사항
+## 주요 기능 현황
 
-### 1️⃣ 모듈화 구조
-- **Cogs 시스템**: 기능별로 독립적인 모듈 분리
-- **계층 분리**: utils, services, handlers로 관심사 분리
-- **설정 중앙화**: config.py에서 모든 설정 관리
+### Git 커맨드
+- **!git status** - 저장소 상태 조회 (구현 완료)
+- **!git log** - 최근 커밋 로그 조회 (구현 완료)
+- **!git branch** - 브랜치 목록 표시 (구현 완료)
+- **!git pull** - 저장소 동기화 (구현 완료)
 
-### 2️⃣ 새로운 기능
+### 저장소 관리
+- **GITHUB_REPO 기반 자동 구성** - GitHub 저장소 자동 clone (구현 완료)
+- **로컬 경로 자동 생성** - repositories/{owner}/{repo} 구조 (구현 완료)
+- **저장소 없을 시 자동 clone** - 첫 실행 시 자동으로 clone (구현 완료)
 
-**Git 커맨드:**
-- `!git status` - 저장소 상태
-- `!git log` - 커밋 로그
-- `!git branch` - 브랜치 목록
-- `!git pull` - 저장소 동기화
+### 로깅 및 모니터링
+- **명령어 실행 로깅** - Console에 모든 명령어 기록 (구현 완료)
+- **사용자/채널 정보 기록** - 누가 어디서 뭘 했는지 로그 (구현 완료)
+- **봇 활성화 알림** - Discord 채널에 활성화 메시지 전송 (구현 완료)
+- **테스트 결과 전송** - Discord 채널에 테스트 결과 메시지 전송 (구현 완료)
 
-**저장소 커맨드:**
-- `!repo info` - 저장소 정보
-- `!repo issues` - 오픈 이슈
-- `!repo prs` - 오픈 PR
+### 테스트 시스템
+- **단위 테스트** - 41개 테스트 (모두 통과)
+- **Git 커맨드 테스트** - 7개
+- **GitHelper 테스트** - 14개
+- **GitService 테스트** - 13개
+- **통합 테스트** - 6개 (워크플로우 전체 테스트)
 
-**관리자 커맨드:**
-- `!admin config` - 설정 확인
-- `!admin ping` - 핑 테스트
-
-### 3️⃣ 헬퍼 클래스
-
-**GitHelper**: GitPython 래핑
-```python
-from src.utils.git_helper import GitHelper
-
-git = GitHelper("./repo")
-commits = git.get_log(10)
-branches = git.get_branches()
-```
-
-**GithubAPI**: GitHub REST API 클라이언트
-```python
-from src.utils.github_api import GithubAPI
+### 웹훅 (준비 중)
+- **GitHub 이벤트 리스너** - 기본 구조 준비
+- **웹훅 핸들러** - 준비 중
 
 github = GithubAPI(token)
 repos = await github.get_repo_info("owner", "repo")
