@@ -1,10 +1,10 @@
-## 📋 커맨드 문서
+## 커맨드 문서
 
 이 문서는 Discord-Git Bot의 모든 커맨드를 설명합니다.
 
-### 🔧 기본 커맨드
+### 기본 커맨드
 
-#### `!ping`
+#### !ping
 봇이 응답하는지 확인하고 응답 시간을 표시합니다.
 
 ```
@@ -13,32 +13,32 @@
 
 **응답:**
 ```
-🏓 Pong!
+Pong!
 응답 시간: 45ms
 ```
 
 ---
 
-### 📝 Git 커맨드 (`!git`)
+### Git 커맨드 (!git)
 
 Git 저장소 관련 작업을 수행합니다.
 
-#### `!git status`
+#### !git status
 현재 저장소의 상태를 조회합니다.
 
 ```
 !git status
 ```
 
-#### `!git log [n]`
+#### !git log [n]
 최근 커밋 로그를 조회합니다.
 
 ```
-!git log          # 최근 5개 커밋 (기본값)
-!git log 10       # 최근 10개 커밋
+!git log          최근 5개 커밋 (기본값)
+!git log 10       최근 10개 커밋
 ```
 
-#### `!git branch`
+#### !git branch
 현재 사용 가능한 브랜치 목록을 표시합니다.
 
 ```
@@ -47,13 +47,13 @@ Git 저장소 관련 작업을 수행합니다.
 
 **응답:**
 ```
-🌿 브랜치 목록
+브랜치 목록
 → main
   develop
   feature/new-feature
 ```
 
-#### `!git pull`
+#### !git pull
 저장소를 동기화합니다.
 
 ```
@@ -62,11 +62,11 @@ Git 저장소 관련 작업을 수행합니다.
 
 ---
 
-### 📦 저장소 커맨드 (`!repo`)
+### 저장소 커맨드 (!repo)
 
 GitHub 저장소 정보를 조회합니다.
 
-#### `!repo info`
+#### !repo info
 저장소 기본 정보를 표시합니다.
 
 ```
@@ -75,24 +75,24 @@ GitHub 저장소 정보를 조회합니다.
 
 **응답:**
 ```
-📦 owner/repository
+owner/repository
 
 설명: 프로젝트 설명
 
-⭐ Stars: 42
-🍴 Forks: 8
-📋 Issues: 3
-🔗 URL: https://github.com/owner/repository
+Stars: 42
+Forks: 8
+Issues: 3
+URL: https://github.com/owner/repository
 ```
 
-#### `!repo issues`
+#### !repo issues
 현재 오픈된 이슈 목록을 표시합니다.
 
 ```
 !repo issues
 ```
 
-#### `!repo prs`
+#### !repo prs
 현재 오픈된 Pull Request 목록을 표시합니다.
 
 ```
