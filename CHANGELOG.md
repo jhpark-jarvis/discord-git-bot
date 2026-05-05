@@ -17,7 +17,75 @@
 
 ---
 
+## [1.2.0] - 2026-05-05
+
+### 추가됨
+- Discord 테스트 실행 커맨드 (!test)
+  - !test all - 모든 테스트 실행
+  - !test unit - 유닛 테스트만 실행
+  - !test integration - 통합 테스트만 실행
+  - !test git_commands/git_helper/git_service/integration_git - 특정 테스트 실행
+  - 테스트 진행사항 실시간 표시 (Console + Discord)
+  - 테스트 완료 후 상세 결과 Embed 전송
+  - 긴 출력은 파일로 자동 전송
+
+- 테스트 실행 유틸리티 (TestRunner)
+  - 모든 테스트 타입 지원
+  - 진행사항 콜백 기능
+  - pytest 출력 파싱
+  - Discord Embed 자동 생성
+
+- 테스트 실행 스크립트
+  - run_tests.bat (Windows CMD)
+  - run_tests.ps1 (Windows PowerShell)
+  - run_tests.sh (Linux/macOS Bash)
+  - 테스트 타입별 실행 지원
+
+### 개선됨
+- 테스트 시스템 디렉토리 구조 정리
+- pytest 설정 최적화
+- COMMANDS.md에 테스트 커맨드 문서화
+- STATUS.md 업데이트
+
+---
+
 ## [1.1.0] - 2026-05-04
+
+### 추가됨
+- GITHUB_REPO 기반 자동 저장소 관리
+  - GitHub 저장소에서 자동 clone
+  - 로컬 경로 자동 생성 (repositories/{owner}/{repo})
+  - 저장소 없을 시 첫 실행 시 자동 clone
+
+- 포괄적인 테스트 시스템
+  - 41개 단위 및 통합 테스트
+  - pytest 및 pytest-asyncio 기반
+  - 모든 테스트 통과
+
+- 명령어 실행 로깅
+  - Console에 모든 명령어 기록
+  - 사용자, 채널, 명령어, 결과 기록
+  - [GIT COMMAND], [RESULT] 태그 사용
+
+- 봇 활성화 알림
+  - Discord 채널에 봇 시작 메시지
+  - 저장소 정보 및 사용 가능한 명령어 표시
+  - Embed 형식으로 전송
+
+- 테스트 결과 전송 스크립트
+  - send_test_results.py 추가
+  - Discord 채널에 테스트 결과 메시지 전송
+  - 카테고리별 테스트 결과 표시
+
+### 개선됨
+- GitService 초기화 방식
+  - github_repo 매개변수 추가
+  - 저장소 자동 clone 기능
+  - 오류 처리 강화
+
+- config.py
+  - GITHUB_REPO에서 경로 자동 생성
+  - owner/repo 파싱 로직 추가
 
 ### 추가됨
 - GITHUB_REPO 기반 자동 저장소 관리

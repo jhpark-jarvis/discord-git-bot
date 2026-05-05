@@ -40,6 +40,29 @@
 - **GitService 테스트** - 13개
 - **통합 테스트** - 6개 (워크플로우 전체 테스트)
 
+### Discord 테스트 커맨드 (신규 - v1.2.0)
+- **!test all** - 모든 테스트 실행 (유닛 + 통합)
+- **!test unit** - 유닛 테스트만 실행
+- **!test integration** - 통합 테스트만 실행
+- **!test git_commands** - Git 커맨드 테스트만 실행
+- **!test git_helper** - Git Helper 테스트만 실행
+- **!test git_service** - Git Service 테스트만 실행
+- **!test integration_git** - Git 통합 테스트만 실행
+- **기능:**
+  - Console과 Discord 채널 모두에 진행사항 표시
+  - 테스트 완료 후 상세 결과 Embed로 전송
+  - 출력이 길면 파일로 전송
+  - 관리자만 사용 가능
+
+### 테스트 실행 스크립트 (신규 - v1.2.0)
+- **run_tests.bat** - Windows 배치 스크립트
+- **run_tests.ps1** - PowerShell 스크립트
+- **run_tests.sh** - Linux/macOS 쉘 스크립트
+- **사용법:**
+  - run_tests.bat [all|unit|integration|test_name]
+  - .\run_tests.ps1 -TestType all
+  - ./run_tests.sh all
+
 ### 웹훅 (준비 중)
 - **GitHub 이벤트 리스너** - 기본 구조 준비
 - **웹훅 핸들러** - 준비 중

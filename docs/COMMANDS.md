@@ -101,18 +101,83 @@ URL: https://github.com/owner/repository
 
 ---
 
-### ⚙️ 관리자 커맨드 (`!admin`)
+### 테스트 커맨드 (!test)
+
+테스트를 실행하고 결과를 확인합니다. (관리자만 사용 가능)
+
+#### !test all
+모든 테스트 (유닛 + 통합)를 실행합니다.
+
+```
+!test all
+```
+
+**응답:**
+- 테스트 시작 메시지 (진행 중)
+- 테스트 완료 메시지 (결과: 통과/실패 개수)
+- 상세 출력 (텍스트 또는 파일)
+
+#### !test unit
+유닛 테스트만 실행합니다.
+
+```
+!test unit
+```
+
+#### !test integration
+통합 테스트만 실행합니다.
+
+```
+!test integration
+```
+
+#### !test git_commands
+Git 커맨드 테스트만 실행합니다.
+
+```
+!test git_commands
+```
+
+#### !test git_helper
+Git Helper 테스트만 실행합니다.
+
+```
+!test git_helper
+```
+
+#### !test git_service
+Git Service 테스트만 실행합니다.
+
+```
+!test git_service
+```
+
+#### !test integration_git
+Git 통합 테스트만 실행합니다.
+
+```
+!test integration_git
+```
+
+**주의사항:**
+- 테스트 실행 중에는 다른 테스트를 동시에 실행할 수 없습니다.
+- 테스트 실행 시간은 테스트 종류와 개수에 따라 다릅니다 (일반적으로 1-3초).
+- 테스트 출력이 길면 파일로 전송됩니다.
+
+---
+
+### 관리자 커맨드 (!admin)
 
 **필수 권한:** 관리자
 
-#### `!admin config`
+#### !admin config
 봇의 설정 정보를 확인합니다.
 
 ```
 !admin config
 ```
 
-#### `!admin ping`
+#### !admin ping
 봇 핑 테스트를 실행합니다.
 
 ```

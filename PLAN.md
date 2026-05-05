@@ -24,14 +24,23 @@ Git 이벤트를 실시간으로 Discord 채널에 알림하고, Discord 채팅�
 - !git pull - 저장소 동기화 (완료)
 - !repo info - 저장소 정보 조회 (구현 중)
 
-### 3. 자동 모니터링 및 알림 (우선순위 중간)
+### 3. 테스트 관리 (우선순위 높음) - 완료
+**설명**: Discord 커맨드로 테스트 실행 및 결과 확인
+- !test all - 모든 테스트 실행 (완료)
+- !test unit - 유닛 테스트만 실행 (완료)
+- !test integration - 통합 테스트만 실행 (완료)
+- 테스트 진행사항 실시간 표시 (완료)
+- 테스트 결과 Discord Embed로 전송 (완료)
+- 테스트 실행 스크립트 (완료)
+
+### 4. 자동 모니터링 및 알림 (우선순위 중간)
 **설명**: 저장소 상태를 주기적으로 확인
-- 테스트 실패 알림
+- 테스트 실패 알림 (기본 구현)
 - CI/CD 파이프라인 상태
 - 빌드 실패/성공 알림
 - 코드 리뷰 요청 알림
 
-### 4. 협업 기능 (우선순위 낮음)
+### 5. 협업 기능 (우선순위 낮음)
 **설명**: 팀 협업 효율화
 - 커밋 기여도 통계
 - 주간/월간 활동 리포트
@@ -49,13 +58,15 @@ discord-git-bot/
 │   ├── cogs/                기능 모듈 (Commands)
 │   │   ├── git_commands.py  Git 커맨드 (!git ...)
 │   │   ├── repo_commands.py 저장소 커맨드 (!repo ...)
-│   │   └── admin_commands.py 관리자 커맨드 (!admin ...)
+│   │   ├── admin_commands.py 관리자 커맨드 (!admin ...)
+│   │   └── test_commands.py 테스트 커맨드 (!test ...) (신규)
 │   ├── handlers/            이벤트 핸들러
 │   │   ├── github_webhook.py GitHub 웹훅 처리
 │   │   └── github_events.py  GitHub 이벤트 파서
 │   ├── utils/               유틸리티 함수
 │   │   ├── git_helper.py    Git 명령 래퍼
 │   │   ├── github_api.py    GitHub REST API
+│   │   ├── test_runner.py   테스트 실행 및 파싱 (신규)
 │   │   ├── logger.py        로깅 설정
 │   │   ├── validators.py    입력값 검증
 │   │   └── embedders.py     Discord Embed 생성
@@ -71,6 +82,9 @@ discord-git-bot/
 ├── scripts/                 유틸리티 스크립트
 │   ├── send_test_results.py 테스트 결과 전송
 │   ├── test_send_message.py 메시지 테스트
+│   ├── run_tests.bat        Windows 테스트 스크립트 (신규)
+│   ├── run_tests.ps1        PowerShell 테스트 스크립트 (신규)
+│   ├── run_tests.sh         Linux/macOS 테스트 스크립트 (신규)
 │   └── setup_venv.*         가상환경
 ├── tests/                   테스트 코드
 │   ├── conftest.py          pytest 설정

@@ -78,6 +78,18 @@ python -m src.main
 !ping                봇 응답 확인
 ```
 
+### 테스트 커맨드 (`!test`, 관리자만)
+
+```
+!test all            모든 테스트 실행 (유닛 + 통합)
+!test unit           유닛 테스트만 실행
+!test integration    통합 테스트만 실행
+!test git_commands   Git 커맨드 테스트
+!test git_helper     Git Helper 테스트
+!test git_service    Git Service 테스트
+!test integration_git Git 통합 테스트
+```
+
 더 많은 커맨드: [COMMANDS.md](docs/COMMANDS.md)
 
 ## 프로젝트 구조
